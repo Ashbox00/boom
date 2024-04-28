@@ -1,21 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://wonc0u8na4v7"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_63olt"]
-[ext_resource type="Texture2D" uid="uid://btwp0236701ti" path="res://icon.svg" id="2_1vo3f"]
+[ext_resource type="PackedScene" uid="uid://ekfike7eoaai" path="res://bg.tscn" id="2_17p3u"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_63olt")
-
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(575, 320.5)
-scale = Vector2(8.95312, 5.00781)
-texture = ExtResource("2_1vo3f")
 
 [node name="Play" type="Button" parent="."]
 offset_left = 426.0
 offset_top = 119.0
 offset_right = 704.0
 offset_bottom = 271.0
+theme_override_font_sizes/font_size = 45
 text = "PLAY
 "
 
@@ -26,9 +22,12 @@ offset_right = 707.0
 offset_bottom = 468.0
 tooltip_text = "QUIT BUTTON
 "
+theme_override_font_sizes/font_size = 45
 text = "QUIT
 
 "
+
+[node name="BG" parent="." instance=ExtResource("2_17p3u")]
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

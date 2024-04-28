@@ -14,7 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://bxqtmoap52xxr" path="res://Sunny Land Collection Files/Sunny Land Collection Files/Packs/Sunnyland/sprites/player/run/player-run-5.png" id="12_miu82"]
 [ext_resource type="Texture2D" uid="uid://1l3ytcjf4pjx" path="res://Sunny Land Collection Files/Sunny Land Collection Files/Packs/Sunnyland/sprites/player/run/player-run-6.png" id="13_jxr7j"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2tlu"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sd3qf"]
+size = Vector2(15, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nt6bk"]
 animations = [{
@@ -83,6 +84,34 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_cbfhr"]
+resource_name = "fall"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_ixip1"]
@@ -171,34 +200,6 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_cbfhr"]
-resource_name = "fall"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"jump"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_67pd6"]
 _data = {
 "RESET": SubResource("Animation_scjxt"),
@@ -212,14 +213,19 @@ _data = {
 script = ExtResource("1_nx4vn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_s2tlu")
+position = Vector2(-0.5, 4)
+shape = SubResource("RectangleShape2D_sd3qf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nt6bk")
-animation = &"jump"
+animation = &"idle"
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.1, 2.1)
+limit_left = 0
+limit_top = 0
+limit_bottom = 575
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
